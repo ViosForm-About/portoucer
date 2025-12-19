@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { FaPython, FaJs, FaPhp } from "react-icons/fa";
+import { FaPython, FaJs, FaPhp, FaTelegramPlane } from "react-icons/fa";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Stars, MeshDistortMaterial } from "@react-three/drei";
 import avatar from "./assets/avatar.png";
@@ -8,8 +8,11 @@ import avatar from "./assets/avatar.png";
 /* ================= BLACKHOLE SHADER ================= */
 function BlackHole() {
   const mesh = useRef();
+
   useFrame(({ clock }) => {
-    mesh.current.rotation.z = clock.elapsedTime * 0.5;
+    if (mesh.current) {
+      mesh.current.rotation.z = clock.elapsedTime * 0.5;
+    }
   });
 
   return (
@@ -31,8 +34,10 @@ function MouseParticles() {
   const { mouse } = useThree();
 
   useFrame(() => {
-    ref.current.position.x = mouse.x * 3;
-    ref.current.position.y = mouse.y * 3;
+    if (ref.current) {
+      ref.current.position.x = mouse.x * 3;
+      ref.current.position.y = mouse.y * 3;
+    }
   });
 
   return <Stars ref={ref} radius={20} depth={10} count={2000} factor={2} />;
@@ -58,7 +63,7 @@ export default function App() {
         animate={{ scale: 1 }}
         transition={{ delay: 2.2, type: "spring" }}
       >
-        <img src={avatar} className="avatar" />
+        <img src={avatar} className="avatar" alt="avatar" />
         <h2 className="glitch">Vios - Userbot</h2>
         <p>Cyber Fullstack Developer</p>
 
@@ -68,7 +73,16 @@ export default function App() {
           <FaPhp />
         </div>
 
-        <a className="btn" href="#">Access Profile</a>
+        {/* TELEGRAM BUTTON */}
+        <a
+          className="btn"
+          href="https://t.me/suryakit12"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaTelegramPlane style={{ marginRight: "8px" }} />
+          Access Profile
+        </a>
 
         <p className="desc">
           Cyberpunk profile dengan React + Vite.
