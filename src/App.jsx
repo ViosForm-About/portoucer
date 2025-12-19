@@ -59,7 +59,7 @@ export default function App() {
         transition={{ delay: 2.2, type: "spring" }}
       >
         <img src={avatar} className="avatar" />
-        <h2 className="glitch">Kevin Nelson</h2>
+        <h2 className="glitch">Vios - Userbot</h2>
         <p>Cyber Fullstack Developer</p>
 
         <div className="icons">
